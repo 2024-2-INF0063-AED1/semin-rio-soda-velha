@@ -11,7 +11,7 @@ Palavras-chave: jogo da velha, jogo, algoritmo.
 
 ## 1.1 Problema
 
-	O problema em pauta é a adaptação de um jogo clássico ao ambiente virtual de forma a expandir, se possível, os conceitos do jogo. Tendo como objetivo explorar ao máximo as opções do jogo base e adicionar novas ideias adquiridas ao longo de pesquisas na internet, tendo como objetivo 3 possíveis modos de jogo, o jogo clássico que segue as regras originais do jogo, uma opção que expande o tamanho do tabuleiro de forma personalizada pelo jogador, adicionando novas casas e possibilidades estratégicas e por fim um novo modo de jogo (jogo da velha infinito) que dinamiza e evita resultados inconclusivos do jogo (o jogo resulta em "velha", sem ganhadores).
+O problema em pauta é a adaptação de um jogo clássico ao ambiente virtual de forma a expandir, se possível, os conceitos do jogo. Tendo como objetivo explorar ao máximo as opções do jogo base e adicionar novas ideias adquiridas ao longo de pesquisas na internet, tendo como objetivo 3 possíveis modos de jogo, o jogo clássico que segue as regras originais do jogo, uma opção que expande o tamanho do tabuleiro de forma personalizada pelo jogador, adicionando novas casas e possibilidades estratégicas e por fim um novo modo de jogo (jogo da velha infinito) que dinamiza e evita resultados inconclusivos do jogo (o jogo resulta em "velha", sem ganhadores).
 
 ## 1.2 Literatura
 
@@ -31,20 +31,20 @@ Este é um exemplo dos vídeos que motivaram a criação do modo de jogo dinâmi
 
 ## 1.3 Dataset
 
-	Os datasets a serem utilizados serão as entradas dos usuários que serão armazenadas durante a execução do jogo.
+Os datasets a serem utilizados serão as entradas dos usuários que serão armazenadas durante a execução do jogo.
 
 ## 1.4 Métodos
 
-	Explorar as possibilidades do jogo e criar algoritmos que possuam propriedades matemáticas mais aparentes, e usar de métodos pouco utilizados para forçar uma aparência maior de experiência, a fim de promover um *take* mais experimental e evitar repetições de códigos já previamente inscritos.  
-	Utilizaremos muito conhecimentos adquiridos durante as classes de Estrutura de Dados 1 para executar maior parte da lógica que foi desenvolvida em grupo.
+Explorar as possibilidades do jogo e criar algoritmos que possuam propriedades matemáticas mais aparentes, e usar de métodos pouco utilizados para forçar uma aparência maior de experiência, a fim de promover um *take* mais experimental e evitar repetições de códigos já previamente inscritos.  
+Utilizaremos muito conhecimentos adquiridos durante as classes de Estrutura de Dados 1 para executar maior parte da lógica que foi desenvolvida em grupo.
 
 ## 1.5 Avaliação
 
-	Os resultados serão medidos através de testes feitos pela equipe visando encontrar “*bugs*” ou outros tipos de erros que possam aparecer durante a execução do programa. O projeto será classificado como finalizado quando os objetivos forem atingidos e todos (ou caso não seja possível, a maioria) dos problemas sejam resolvidos.
+Os resultados serão medidos através de testes feitos pela equipe visando encontrar “*bugs*” ou outros tipos de erros que possam aparecer durante a execução do programa. O projeto será classificado como finalizado quando os objetivos forem atingidos e todos (ou caso não seja possível, a maioria) dos problemas sejam resolvidos.
 
 # 2 Fundamentos Teóricos
 
-	A ideia principal do projeto, por ser experimental, será utilizar métodos que não são amplamente utilizados para desenvolver a lógica/algoritmos de jogos da velha, especificamente utilizando matrizes de segunda ordem. Com isso iremos trabalhar em cima de um único vetor, se possível, para trabalhar com operações aritméticas e matemática de possibilidades para concluirmos uma vitória ou uma possível “*velha”*.   
+A ideia principal do projeto, por ser experimental, será utilizar métodos que não são amplamente utilizados para desenvolver a lógica/algoritmos de jogos da velha, especificamente utilizando matrizes de segunda ordem. Com isso iremos trabalhar em cima de um único vetor, se possível, para trabalhar com operações aritméticas e matemática de possibilidades para concluirmos uma vitória ou uma possível “*velha”*.   
 	Também procurando aplicar os conhecimentos das aulas de Estrutura de Dados 1, será feito um encaixe do que for possível de recortes do conteúdo ministrado em aulas para nosso projeto, a fim de auxiliar no que for possível em fazer um código com resultados mais promissores, dignos de ser considerado um experimento.
 
 # 3 Metodologia
