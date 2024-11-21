@@ -49,7 +49,7 @@ Este é um exemplo dos vídeos que motivaram a criação do modo de jogo dinâmi
 
 # 3 Metodologia
 
-	![Captura de tela 2024-11-21 152858](https://github.com/user-attachments/assets/8081fba0-0e8e-4633-b5ea-4a6d545ac7d3)
+![Captura de tela 2024-11-21 152858](https://github.com/user-attachments/assets/8081fba0-0e8e-4633-b5ea-4a6d545ac7d3)
 
 
 # 4 Resultados
