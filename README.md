@@ -4,3 +4,5 @@
 MATRÍCULA - NOME COMPLETO
 
 202302552 - Maria Luiza Monteiro Espindola Cardoso
+
+202302533 - Erick Marinho Fleury
