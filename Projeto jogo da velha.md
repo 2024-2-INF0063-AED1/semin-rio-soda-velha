@@ -54,9 +54,11 @@ A ideia principal do projeto, por ser experimental, será utilizar métodos que 
 
 # 4 Resultados
 
-# 
+Os resultados foram positivos, foi possível criar o jogo em console com uma interface gráfica que não deixa tudo muito poluído, com funções que limpam a cada nova jogada deixando tudo bem fluido. Foi possível limpar bastante o código com métodos inovativos, como o grid search para verificar as vitórias do jogo e também o uso de vetores para gerar o jogo.
 
 # 5 Conclusões
+
+Concluímos que é possível criar um jogo da velha "xique" usando métodos sofisticados de estrutura de dados aplicados em vetores, usando a linguagem C e técnicas de estrutura de dados como Grid Search e métodos de planificação de vetores.
 
 # Referências
 
