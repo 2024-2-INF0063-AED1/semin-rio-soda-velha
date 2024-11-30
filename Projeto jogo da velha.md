@@ -55,6 +55,11 @@ A ideia principal do projeto, por ser experimental, será utilizar métodos que 
 # 4 Resultados
 
 Os resultados foram positivos, foi possível criar o jogo em console com uma interface gráfica que não deixa tudo muito poluído, com funções que limpam a cada nova jogada deixando tudo bem fluido. Foi possível limpar bastante o código com métodos inovativos, como o grid search para verificar as vitórias do jogo e também o uso de vetores para gerar o jogo.
+![image](https://github.com/user-attachments/assets/d7443c84-b5a1-46da-87f6-1fd0a5dff581)
+Nesta imagem podemos ver o modo de jogo padrão que foi implementado em nosso grupo, fortificando ainda nossa metodologia que serviu como um norte para o resultado final.
+
+Praticamente temos funções que preparam o jogo para ser executado e também que exibem o jogo inicialmente, e rodamos um loop no método principal que possuí algoritmos de checagem em grid, para fazer boa parte do jogo funcionar. O jogo funciona dentro de um "do/while" quase infinito mas que por depender das entradas não necessáriamente é infinito e se uma condição de vitória for alcançada o jogo irá voltar ao menu.
+
 
 # 5 Conclusões
 
