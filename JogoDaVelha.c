@@ -20,6 +20,8 @@ char *tabuleiro;
 // Array que armazena a string de vitoria (xxx... ou ooo...)
 char *vitoria;
 
+char **posicaoArr;
+
 // Função que verifica se a posicao após o movimento é válida
 bool isNotValid(int x, int y)
 {
@@ -57,6 +59,7 @@ bool verificaVitoria(int x, int y, int jogador)
     return false;
 }
 
+// Função chamada quando é necessario preparar o jogo (tamanho do tabuleiro e array de vitoria dependem da opção escolhida)
 int preparaJogo(int i)
 {
     // Se a opção escolhida for 2 ou 3, o jogador escolhe o tamanho do tabuleiro
@@ -65,26 +68,40 @@ int preparaJogo(int i)
         while (n < 3)
         {
             printf("Digite o tamanho do tabuleiro maior ou igual a 3 (0 finaliza o programa): ");
+            if (!scanf("%d", &n))
+            {
+                scanf("%*[^\n]"); // Discard that line up to the newline
+                printf("Entrada invalida!\n");
+                n = -1;
+            }
 
-            scanf("%d", &n);
             if (n == 0)
             {
                 return 0;
             }
         }
+    } // Se a opção escolhida for 1, o tamanho do tabuleiro é 3
+    else
+    {
+        n = 3;
     }
 
-    // Libera a memória alocada anteriormente para o tabuleiro e o array de vitoria para evitar memory leaks
+    // Libera a memória alocada anteriormente para o tabuleiro, o array de vitoria e o array das posições para evitar memory leaks
     free(tabuleiro);
     free(vitoria);
     // Aloca a memória para o tabuleiro e o array de vitoria
     tabuleiro = (char *)malloc(n * n * sizeof(char));
     vitoria = (char *)malloc(n * 2 * sizeof(char));
+    if (i == 3)
+    {
+        free(posicaoArr);
+        posicaoArr = (char **)malloc(n * 2 * sizeof(char *));
+    }
 
     // Inicializa o tabuleiro com espaços vazios
     for (int i = 0; i < n * n; i++)
     {
-        tabuleiro[i] = '1' + i;
+        tabuleiro[i] = ' ';
     }
 
     // Inicializa o array de vitoria com os simbolos de vitoria
@@ -98,6 +115,7 @@ int preparaJogo(int i)
     return 1;
 }
 
+// Função que printa o tabuleiro atual
 void mostraTabuleiro()
 {
     // Printa o tabuleiro atual para o jogador
@@ -106,12 +124,19 @@ void mostraTabuleiro()
     {
         for (int j = 0; j < n; j++)
         {
-            printf("%c   |   ", tabuleiro[n * i + j]);
+            if (tabuleiro[n * i + j] == ' ')
+            {
+                printf("  %d  ", n * i + j + 1);
+            }
+            else
+            {
+                printf("  %c  ", tabuleiro[n * i + j]);
+            }
         }
         printf("\n");
         for (int j = 0; j < n; j++)
         {
-            printf("--");
+            printf("------");
         }
         printf("\n");
     }
@@ -128,82 +153,128 @@ int main()
         do
         {
             printf("Digite 1 para jogar o jogo base, 2 para o jogo de tamanho customizavel e 3 para o modo dinamico (0 para finalizar o programa): ");
-            scanf("%d", &p);
+            if (!scanf("%d", &p))
+            {
+                scanf("%*[^\n]"); // Discard that line up to the newline
+                printf("Entrada invalida!\n");
+            }
             if (p == 0)
             {
                 return 0;
             }
         } while (p != 0 && p != 1 && p != 2 && p != 3);
 
-        // Se a opção escolhida for 1 ou 2, executa o jogo base ou o jogo de tamanho customizavel
-        if (p == 1 || p == 2)
+        // Chama a variavel para preparar o jogo
+        preparaJogo(p);
+
+        // Variavel que armazena o jogador atual (0 ou 1), é utilizado na função que verifica a vitoria para
+        // indexar a string de vitoria correta
+        int jogador = 0;
+
+        // Posição escolihada pelo jogador para realizar o movimento
+        int posicao;
+
+        // Variavel que armazena o turno atual
+        int turno = 0;
+
+        // Variavel que armazena as variaveis para indexar as posições mais antigas atuais do X e do O
+        int indexX = 0, indexO = n;
+
+        // Variavel que armazena se o jogo acabou
+        int final = false;
+
+        // Loop do jogo
+        do
         {
-            // Se a opção escolhida for 1, o tamanho do tabuleiro é 3
-            if (p == 1)
+            // Mostra o tabuleiro
+            mostraTabuleiro();
+
+            // Le a posição escolhida pelo jogador
+            printf("Jogador %d, digite a posicao: ", jogador + 1);
+            while (!scanf("%d", &posicao))
             {
-                n = 3;
+                scanf("%*[^\n]"); // Discard that line up to the newline
+                printf("Entrada invalida!\n");
             }
 
-            // Chama a variavel para preparar o jogo
-            preparaJogo(p);
-
-            // Variavel que armazena o jogador atual (0 ou 1), é utilizado na função que verifica a vitoria para
-            // indexar a string de vitoria correta
-            int jogador = 0;
-
-            // Posição escolihada pelo jogador para realizar o movimento
-            int posicao;
-
-            // Variavel que armazena se o jogo acabou
-            int final = false;
-
-            // Loop do jogo
-            do
+            // Se a posição escolhida é válida, realiza o movimento e verifica se o jogador venceu caso não então
+            // o jogo continua com o proximo jogador (jogador+1)
+            if ((tabuleiro[posicao - 1] != 'X' && tabuleiro[posicao - 1] != 'O') && posicao >= 0 && posicao <= n * n)
             {
-                // Mostra o tabuleiro
-                mostraTabuleiro();
-
-                // Le a posição escolhida pelo jogador
-                printf("Jogador %d, digite a posicao: ", jogador + 1);
-                scanf("%d", &posicao);
-
-                // Se a posição escolhida é válida, realiza o movimento e verifica se o jogador venceu caso não então
-                // o jogo continua com o proximo jogador (jogador+1)
-                if ((tabuleiro[posicao - 1] != 'X' && tabuleiro[posicao - 1] != 'O') && posicao >= 0 && posicao <= n * n)
+                tabuleiro[posicao - 1] = jogador == 0 ? 'X' : 'O';
+                if (p == 3 && jogador == 0)
                 {
-                    tabuleiro[posicao - 1] = jogador == 0 ? 'X' : 'O';
-                    for (int i = 0; i < n; i++)
+                    if (turno >= n * 2)
                     {
-                        for (int j = 0; j < n; j++)
+                        *posicaoArr[jogador * n + indexX] = ' ';
+                    }
+                    posicaoArr[jogador * n + indexX] = &tabuleiro[posicao - 1];
+                    indexX++;
+                    if (indexX >= n)
+                    {
+                        indexX = 0;
+                    }
+                }
+                else if (p == 3 && jogador)
+                {
+                    if (turno >= n * 2)
+                    {
+                        *posicaoArr[jogador * n + indexO] = ' ';
+                    }
+                    posicaoArr[jogador * n + indexO] = &tabuleiro[posicao - 1];
+                    indexO++;
+                    if (indexO >= 2 * n)
+                    {
+                        indexO = n;
+                    }
+                }
+
+                // Verifica se o jogador venceu
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (verificaVitoria(i, j, jogador))
                         {
-                            if (verificaVitoria(i, j, jogador))
-                            {
-                                final = true;
-                                break;
-                            }
-                        }
-                        if (final)
-                        {
+                            final = true;
                             break;
                         }
                     }
-                    // Limpa o console antes de imprimir
-                    system("cls");
                     if (final)
                     {
-                        printf("Jogador %d venceu!\n", jogador + 1);
-                        n = 0;
+                        break;
                     }
-                    jogador = (jogador + 1) % 2;
                 }
-                // Se a posição escolhida é inválida, printa uma mensagem de erro
-                else
+
+                // Limpa o console antes de imprimir
+                system("cls");
+                if (final)
                 {
-                    // Limpa o console antes de imprimir
-                    system("cls");
-                    printf("Posicao invalida!\n");
+                    printf("Jogador %d venceu!\n", jogador + 1);
+                    mostraTabuleiro();
+                    printf("Digite 0 para finalizar o programa ou qualquer outro numero para continuar jogando: ");
+                    int x;
+                    if (!scanf("%d", &x))
+                    {
+                        scanf("%*[^\n]"); // Discard that line up to the newline
+                        printf("Entrada invalida!\n");
+                    }
+                    if (!x)
+                    {
+                        return 0;
+                    }
+                    n = 0;
                 }
-            } while (!final);
-        }
+                jogador = (jogador + 1) % 2;
+                turno++;
+            }
+            // Se a posição escolhida é inválida, printa uma mensagem de erro
+            else
+            {
+                // Limpa o console antes de imprimir
+                system("cls");
+                printf("Posicao invalida!\n");
+            }
+        } while (!final);
     } while (true);
 }
