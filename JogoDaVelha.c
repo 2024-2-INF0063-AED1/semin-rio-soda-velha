@@ -20,6 +20,7 @@ char *tabuleiro;
 // Array que armazena a string de vitoria (xxx... ou ooo...)
 char *vitoria;
 
+// Array que armazena as posições mais antigas atuais do X e do O
 char **posicaoArr;
 
 // Função que verifica se a posicao após o movimento é válida
@@ -70,7 +71,10 @@ int preparaJogo(int i)
             printf("Digite o tamanho do tabuleiro maior ou igual a 3 (0 finaliza o programa): ");
             if (!scanf("%d", &n))
             {
-                scanf("%*[^\n]"); // Discard that line up to the newline
+                int c;
+                while ((c = getchar()) != '\n' && c != EOF)
+                {
+                } // Discard that line up to the newline
                 printf("Entrada invalida!\n");
                 n = -1;
             }
@@ -155,7 +159,10 @@ int main()
             printf("Digite 1 para jogar o jogo base, 2 para o jogo de tamanho customizavel e 3 para o modo dinamico (0 para finalizar o programa): ");
             if (!scanf("%d", &p))
             {
-                scanf("%*[^\n]"); // Discard that line up to the newline
+                int c;
+                while ((c = getchar()) != '\n' && c != EOF)
+                {
+                } // Discard that line up to the newline
                 printf("Entrada invalida!\n");
             }
             if (p == 0)
@@ -165,7 +172,10 @@ int main()
         } while (p != 0 && p != 1 && p != 2 && p != 3);
 
         // Chama a variavel para preparar o jogo
-        preparaJogo(p);
+        if (!preparaJogo(p))
+        {
+            return 0;
+        }
 
         // Variavel que armazena o jogador atual (0 ou 1), é utilizado na função que verifica a vitoria para
         // indexar a string de vitoria correta
@@ -193,7 +203,10 @@ int main()
             printf("Jogador %d, digite a posicao: ", jogador + 1);
             while (!scanf("%d", &posicao))
             {
-                scanf("%*[^\n]"); // Discard that line up to the newline
+                int c;
+                while ((c = getchar()) != '\n' && c != EOF)
+                {
+                } // Discard that line up to the newline
                 printf("Entrada invalida!\n");
             }
 
@@ -202,6 +215,7 @@ int main()
             if ((tabuleiro[posicao - 1] != 'X' && tabuleiro[posicao - 1] != 'O') && posicao >= 0 && posicao <= n * n)
             {
                 tabuleiro[posicao - 1] = jogador == 0 ? 'X' : 'O';
+
                 if (p == 3 && jogador == 0)
                 {
                     if (turno >= n * 2)
@@ -252,11 +266,14 @@ int main()
                 {
                     printf("Jogador %d venceu!\n", jogador + 1);
                     mostraTabuleiro();
-                    printf("Digite 0 para finalizar o programa ou qualquer outro numero para continuar jogando: ");
+                    printf("Digite qualquer numero para continuar jogando: ");
                     int x;
-                    if (!scanf("%d", &x))
+                    while (!scanf("%d", &x))
                     {
-                        scanf("%*[^\n]"); // Discard that line up to the newline
+                        int c;
+                        while ((c = getchar()) != '\n' && c != EOF)
+                        {
+                        } // Discard that line up to the newline
                         printf("Entrada invalida!\n");
                     }
                     if (!x)
@@ -264,6 +281,28 @@ int main()
                         return 0;
                     }
                     n = 0;
+                    p = -1;
+                }
+                else if (turno + 1 >= n * n && p != 3)
+                {
+                    printf("Empate!\n");
+                    mostraTabuleiro();
+                    printf("Digite qualquer numero para continuar jogando: ");
+                    int x;
+                    while (!scanf("%d", &x))
+                    {
+                        int c;
+                        while ((c = getchar()) != '\n' && c != EOF)
+                        {
+                        } // Discard that line up to the newline
+                        printf("Entrada invalida!\n");
+                    }
+                    if (!x)
+                    {
+                        return 0;
+                    }
+                    n = 0;
+                    p = -1;
                 }
                 jogador = (jogador + 1) % 2;
                 turno++;
